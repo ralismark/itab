@@ -1,7 +1,4 @@
 " Intelligent Indent
-" Author: Timmy Yao
-" Version: 0.9.1
-" Last Modified: 26 October 2016
 
 " The aim of this script is to be able to handle the mode of tab usage which
 " distinguishes 'indent' from 'alignment'.  The idea is to use <tab>
