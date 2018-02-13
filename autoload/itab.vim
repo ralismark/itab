@@ -52,15 +52,7 @@ fun! itab#tab()
 		return "\<Tab>"
 	endif
 
-	" Length of text in current tabstop
-	let tab_bit = virtcol('.') % shiftwidth()
-	let spaces = 1
-
-	if tab_bit > 0
-		let spaces = shiftwidth() - tab_bit + 1
-	end
-
-	return repeat(' ', spaces)
+	return repeat(' ', shiftwidth() - (virtcol('.') - 1) % shiftwidth())
 endfun
 
 " Check the alignment of line.
