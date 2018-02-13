@@ -1,4 +1,4 @@
-# Itab v1.0.0
+# Itab v1.0.1
 
 *Ending the tabs/spaces war by using both*
 
@@ -24,9 +24,6 @@ done may break some features (most notably the x flag in `format-comments`).
 This plugin also overrides tab to insert spaces up to a tabstop when not at the
 beginning of a line. The tab key has the default behaviour when at the beginning
 of the line.
-
-Backspace is also changed to delete the correct amount of spaces. This is
-identical to using `'smarttab'`, but works even if not set.
 
 ## Options
 

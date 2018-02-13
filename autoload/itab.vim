@@ -52,29 +52,15 @@ fun! itab#tab()
 		return "\<Tab>"
 	endif
 
-	return repeat(' ', shiftwidth() - (virtcol('.') % shiftwidth()) + 1)
-endfun
+	" Length of text in current tabstop
+	let tab_bit = virtcol('.') % shiftwidth()
+	let spaces = 1
 
-" Do a smart delete.
-fun! itab#delete()
-	if &smarttab
-		return "\<bs>"
-	endif
+	if tab_bit > 0
+		let spaces = shiftwidth() - tab_bit + 1
+	end
 
-	let line = getline('.')
-	let pos = col('.') - 1
-
-	let ident_sz = strlen(matchstr(line, '^\t* *'))
-
-	let tab_sz  = strlen(matchstr(line, '^\t*'))
-	let space_sz = ident_sz - tab_sz
-
-	if pos > ident_sz || pos <= tab_sz
-		return "\<BS>"
-	else
-		let del_sz = space_sz % shiftwidth()
-		return repeat("\<BS>", del_sz == 0 ? shiftwidth() : del_sz)
-	endif
+	return repeat(' ', spaces)
 endfun
 
 " Check the alignment of line.
@@ -149,7 +135,7 @@ endfun
 " Get the spaces at the end of the indent correct.
 " This is trickier than it should be, but this seems to work.
 fun! itab#cr()
-	return itab#delete_trails(2) . "\<CR>\<c-r>=itab#align(line('.'))" . "\<CR>"
+	return itab#delete_trails(2) . "\<CR>\<c-r>=itab#align(line('.'))\<CR>"
 endfun
 
 fun! itab#redo_indent(type, ...)
