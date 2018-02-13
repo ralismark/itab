@@ -30,7 +30,9 @@ identical to using `'smarttab'`, but works even if not set.
 
 ## Options
 
-- `itab#disable_maps` - Set this to disable mapping tab and backspace
+- `itab#disable_maps` - Disable mapping of tab and backspace
+- `itab#clear_trails` - Delete trailing whitespace when going to a new line
+  after indenting
 
 ## Issues
 

@@ -18,7 +18,7 @@
 " g:itab#disable_maps
 "   disable tab insertion and deletion mappings
 "
-" g:itab#delete_trails
+" g:itab#clear_trails
 "   delete trailing spaces/tabs when going to a new line
 
 " note: indentkeys and cinkeys partially break from the indents

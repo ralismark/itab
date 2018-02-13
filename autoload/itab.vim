@@ -18,7 +18,7 @@
 " g:itab#disable_maps
 "   disable tab insertion and deletion mappings
 "
-" g:itab#delete_trails
+" g:itab#clear_trails
 "   delete trailing spaces/tabs when going to a new line
 
 fun! itab#delete_trails(origin)
@@ -26,7 +26,7 @@ fun! itab#delete_trails(origin)
 	" 1: escape
 	" 2: enter
 
-	let delete_trail_opt = exists('g:itab#delete_trails') && g:itab#delete_trails
+	let delete_trail_opt = exists('itab#clear_trails') && itab#clear_trails
 	let current_line = getline('.')
 
 	if delete_trail_opt
@@ -52,9 +52,6 @@ endfun
 " Insert a smart tab.
 fun! itab#tab()
 	if strpart(getline('.'), 0, col('.') - 1) =~'^\s*$'
-		if exists('b:itab_hook') && b:itab_hook != ''
-			exe 'return '.b:itab_hook
-		endif
 		return "\<Tab>"
 	endif
 
