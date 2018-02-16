@@ -147,8 +147,8 @@ fun! itab#redo_indent(type, ...)
 		if getline(ln) =~ '\S'
 			" Only indent if line is non-empty
 			exec 'normal! ' . ln . 'ggA' . itab#align(ln)
-			let ln += 1
 		endif
+		let ln += 1
 	endwhile
 
 	return ''
