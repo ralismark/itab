@@ -72,37 +72,52 @@ fun! itab#align(line)
 
 	let tskeep = &tabstop
 	let swkeep = &shiftwidth
-	try
-		if a:line == line('.')
-			let b:itab_lastalign = a:line
-		elseif exists('b:itab_lastalign')
-			unlet b:itab_lastalign
-		endif
 
-		let &ts = big_ident_sz
-		let &sw = big_ident_sz
+	if a:line == line('.')
+		let b:itab_lastalign = a:line
+	elseif exists('b:itab_lastalign')
+		unlet b:itab_lastalign
+	endif
 
-		if &indentexpr != ''
+	" make tabs big
+	let &ts = big_ident_sz
+	let &sw = big_ident_sz
+
+	let inda = -1
+
+	if &indentexpr != ''
+		try
 			let v:lnum = a:line
 			sandbox exe 'let inda=' . &indentexpr
 			if inda == -1
 				let inda = indent(a:line-1)
 			endif
-		elseif &cindent
+		catch
+			" Ignore errors, silently fallback
+			" Some preinstalled indentexpr's (e.g. javascript)
+			" have errors, so we just ignore it
+		endtry
+	endif
+
+	" fallback to builtins if indentexpr fails
+	if inda == -1
+		if &cindent
 			let inda = cindent(a:line)
 		elseif &lisp
 			let inda = lispindent(a:line)
 		elseif &autoindent
 			let inda = indent(a:line)
 		elseif &smarttab
+			" Vim's behaviour of smarttab works better
 			return ''
 		else
 			let inda = 0
 		endif
-	finally
-		let &ts=tskeep
-		let &sw=swkeep
-	endtry
+	endif
+
+	" restore tab size
+	let &ts=tskeep
+	let &sw=swkeep
 
 	call setpos('.', pos)
 	if inda == 0
@@ -119,7 +134,6 @@ fun! itab#align(line)
 	if getline(a:line) !~ '^\s*$'
 		let mov_seq = repeat("\<right>", textoff)
 	endif
-
 
 	return "\<home>^\<c-d>" . repeat("\<tab>", indatabs) . repeat(' ', indaspace) . mov_seq
 endfun
