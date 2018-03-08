@@ -25,6 +25,16 @@ This plugin also overrides tab to insert spaces up to a tabstop when not at the
 beginning of a line. The tab key has the default behaviour when at the beginning
 of the line.
 
+Along with key mapping, the plugin also provides several `<Plug>` mappings in
+case you want to extend behaviour:
+
+- `<Plug>ItabEsc` - Delete trailing spaces, then return to insert mode. Replaces `i_<Esc>`.
+- `<Plug>ItabTab` - Insert smart tab. Replaces `i_<Tab>`
+- `<Plug>ItabCr` - Go to new line, deleting trailing space and then indenting
+  correctly. Replaces `i_<Cr>`
+- `<Plug>ItabRealign` - Fix an empty line's indent. Used after several normal
+  mode commands which create blank lines (e.g. `o`, `O`, `S`, `cc`).
+
 ## Options
 
 - `itab#disable_all_maps` - Disable mapping of any keys
