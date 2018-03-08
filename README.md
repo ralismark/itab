@@ -1,4 +1,4 @@
-# Itab v1.0.1
+# Itab v1.1.0
 
 *Ending the tabs/spaces war by using both*
 
