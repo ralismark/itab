@@ -6,7 +6,10 @@ inoremap <silent><expr> <Plug>ItabTab itab#tab()
 inoremap <silent><expr> <Plug>ItabCr itab#delete_trails(2) . "\<CR>\<c-r>=itab#align(line('.'))\<CR>"
 inoremap <silent><expr> <Plug>ItabRealign itab#align(line('.'))
 
-" note: indentkeys and cinkeys partially break from the indents
+" All below here is maps
+if exists('itab#disable_all_maps') && itab#disable_all_maps
+	finish
+end
 
 imap <Esc> <Plug>ItabEsc
 

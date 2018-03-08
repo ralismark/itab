@@ -27,6 +27,7 @@ of the line.
 
 ## Options
 
+- `itab#disable_all_maps` - Disable mapping of any keys
 - `itab#disable_maps` - Disable mapping of tab
 - `itab#clear_trails` - Delete trailing whitespace when going to a new line
   after indenting
