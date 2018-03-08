@@ -1,23 +1,5 @@
 " Intelligent Indent
 
-" The aim of this script is to be able to handle the mode of tab usage which
-" distinguishes 'indent' from 'alignment'.  The idea is to use <tab>
-" characters only at the beginning of lines.
-"
-" This means that an individual can use their own 'tabstop' settings for the
-" indent level, while not affecting alignment.
-"
-" The one caveat with this method of tabs is that you need to follow the rule
-" that you never 'align' elements that have different 'indent' levels.
-"
-" options:
-"
-" g:itab#disable_maps
-"   disable tab insertion and deletion mappings
-"
-" g:itab#clear_trails
-"   delete trailing spaces/tabs when going to a new line
-
 fun! itab#delete_trails(origin)
 	" origin is what caused this call
 	" 1: escape
