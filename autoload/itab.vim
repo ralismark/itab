@@ -120,12 +120,6 @@ fun! itab#align(line)
 	return "\<home>^\<c-d>" . repeat("\<tab>", indatabs) . repeat(' ', indaspace) . mov_seq
 endfun
 
-" Get the spaces at the end of the indent correct.
-" This is trickier than it should be, but this seems to work.
-fun! itab#cr()
-	return itab#delete_trails(2) . "\<CR>\<c-r>=itab#align(line('.'))\<CR>"
-endfun
-
 fun! itab#redo_indent(type, ...)
 	let ln   = line("'[")
 	let lnto = line("']")
