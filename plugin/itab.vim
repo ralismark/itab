@@ -17,10 +17,10 @@ if !exists('itab#disable_maps') || !itab#disable_maps
 	endif
 endif
 
-noremap <silent><expr> o itab#doaction("o")
-noremap <silent><expr> O itab#doaction("O")
-noremap <silent><expr> S itab#doaction("S")
-noremap <silent><expr> cc itab#doaction("cc")
+nnoremap <silent><expr> o itab#doaction("o")
+nnoremap <silent><expr> O itab#doaction("O")
+nnoremap <silent><expr> S itab#doaction("S")
+nnoremap <silent><expr> cc itab#doaction("cc")
 
 nnoremap <silent> = :set opfunc=itab#equalop<cr>g@
 nnoremap <silent><expr> == itab#ndoaction("==")
