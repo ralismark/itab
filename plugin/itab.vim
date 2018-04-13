@@ -23,5 +23,5 @@ nnoremap <silent><expr> S itab#doaction("S")
 nnoremap <silent><expr> cc itab#doaction("cc")
 
 nnoremap <silent> = :set opfunc=itab#equalop<cr>g@
-nnoremap <silent><expr> == itab#ndoaction("==")
-vnoremap <silent><expr> = itab#ndoaction("=")
+nnoremap <silent><expr> == ":left\<cr>" . itab#ndoaction("==")
+vnoremap <silent><expr> = ":left\<cr>gv" . itab#ndoaction("=")

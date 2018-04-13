@@ -3,6 +3,9 @@
 fun! itab#equalop(type)
 	let l:action = '='
 
+	" remove indent
+	'[,']left
+
 	if a:type == "char"
 		exec 'silent normal!' '`[v`]' . itab#ndoaction('=')
 	elseif a:type == "line"
