@@ -15,20 +15,38 @@ fun! itab#equalop(type)
 	endif
 endfun
 
+fun! itab#prepare()
+	let l:big_ident_sz = 80
+
+	" TODO make this work with nested actions
+
+	let b:itab_save = {
+	\ 'ts': &l:tabstop,
+	\ 'sw': &l:shiftwidth,
+	\ }
+
+	let &l:tabstop = l:big_ident_sz
+	let &l:shiftwidth = 0
+	let &l:wrap = 0
+endfun
+
+fun! itab#restore()
+	let &l:tabstop = b:itab_save.ts
+	let &l:shiftwidth = b:itab_save.sw
+
+	unlet b:itab_save
+
+	return ''
+endfun
+
 fun! itab#doaction(action)
 	if &expandtab
 		return a:action
 	endif
 
-	let l:big_ident_sz = 80
+	call itab#prepare()
 
-	let l:tskeep = &tabstop
-	let l:swkeep = &shiftwidth
-
-	let &tabstop = l:big_ident_sz
-	let &shiftwidth = l:big_ident_sz
-
-	return a:action . "\<c-r>=itab#restore(" . l:tskeep . "," . l:swkeep . ")\<cr>"
+	return a:action . "\<c-r>=itab#restore()\<cr>"
 endfun
 
 fun! itab#ndoaction(action)
@@ -36,20 +54,7 @@ fun! itab#ndoaction(action)
 		return a:action
 	endif
 
-	let l:big_ident_sz = 80
+	call itab#prepare()
 
-	let l:tskeep = &tabstop
-	let l:swkeep = &shiftwidth
-
-	let &tabstop = l:big_ident_sz
-	let &shiftwidth = l:big_ident_sz
-
-	return a:action . ":\<c-e>\<c-u>call itab#restore(" . l:tskeep . "," . l:swkeep . ")\<cr>"
-endfun
-
-fun! itab#restore(a, b)
-	let &tabstop = a:a
-	let &shiftwidth = a:b
-
-	return ''
+	return a:action . ":\<c-e>\<c-u>call itab#restore()\<cr>"
 endfun
