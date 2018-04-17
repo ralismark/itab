@@ -23,6 +23,7 @@ fun! itab#prepare()
 	let b:itab_save = {
 	\ 'ts': &l:tabstop,
 	\ 'sw': &l:shiftwidth,
+	\ 'wrap': &l:wrap,
 	\ }
 
 	let &l:tabstop = l:big_ident_sz
@@ -33,6 +34,7 @@ endfun
 fun! itab#restore()
 	let &l:tabstop = b:itab_save.ts
 	let &l:shiftwidth = b:itab_save.sw
+	let &l:wrap = b:itab_save.wrap
 
 	unlet b:itab_save
 
