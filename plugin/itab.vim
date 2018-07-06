@@ -17,11 +17,10 @@ if !exists('itab#disable_maps') || !itab#disable_maps
 	endif
 endif
 
-nnoremap <silent><expr> o itab#doaction("o")
-nnoremap <silent><expr> O itab#doaction("O")
-nnoremap <silent><expr> S itab#doaction("S")
-nnoremap <silent><expr> cc itab#doaction("cc")
+for cmd in ['o', 'O', 'S', 'cc', ']p', '[P', ']P', '[p']
+	exec 'nnoremap <silent><expr>' cmd 'itab#doaction(''' . substitute(cmd, "'", "''", 'g') . ''')'
+endfor
 
 nnoremap <silent> = :set opfunc=itab#equalop<cr>g@
-nnoremap <silent><expr> == ":left\<cr>" . itab#ndoaction("==")
-vnoremap <silent><expr> = ":left\<cr>gv" . itab#ndoaction("=")
+nnoremap <silent><expr> == ":left\<cr>" . itab#doaction("==")
+vnoremap <silent><expr> = ":left\<cr>gv" . itab#doaction("=")

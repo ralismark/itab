@@ -48,15 +48,5 @@ fun! itab#doaction(action)
 
 	call itab#prepare()
 
-	return a:action . "\<c-r>=itab#restore()\<cr>"
-endfun
-
-fun! itab#ndoaction(action)
-	if &expandtab
-		return a:action
-	endif
-
-	call itab#prepare()
-
-	return a:action . ":\<c-e>\<c-u>call itab#restore()\<cr>"
+	return a:action . "\<Cmd>call itab#restore()\<cr>"
 endfun
