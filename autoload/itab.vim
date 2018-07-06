@@ -24,17 +24,30 @@ fun! itab#prepare()
 	\ 'ts': &l:tabstop,
 	\ 'sw': &l:shiftwidth,
 	\ 'wrap': &l:wrap,
+	\ 'wsv_pre': winsaveview(),
 	\ }
 
 	let &l:tabstop = l:big_ident_sz
 	let &l:shiftwidth = 0
 	let &l:wrap = 0
+
+	let b:itab_save.wsv_pre_after = winsaveview()
 endfun
 
 fun! itab#restore()
+	let wsv_pre = b:itab_save.wsv_pre
+	let wsv_pre_after = b:itab_save.wsv_pre_after
+	let wsv_post = winsaveview()
+
 	let &l:tabstop = b:itab_save.ts
 	let &l:shiftwidth = b:itab_save.sw
 	let &l:wrap = b:itab_save.wrap
+
+	" Stop weird screen movement
+	let out_wsv = winsaveview()
+	let out_wsv.leftcol = wsv_pre.leftcol
+
+	call winrestview(out_wsv)
 
 	unlet b:itab_save
 
