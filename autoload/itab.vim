@@ -7,11 +7,11 @@ fun! itab#equalop(type)
 	'[,']left
 
 	if a:type == "char"
-		exec 'silent normal!' '`[v`]' . itab#ndoaction('=')
+		exec 'silent normal!' '`[v`]' . itab#doaction('=')
 	elseif a:type == "line"
-		exec 'silent normal!' '`[V`]' . itab#ndoaction('=')
+		exec 'silent normal!' '`[V`]' . itab#doaction('=')
 	elseif a:type == "block"
-		exec 'silent normal!' "`[\<c-v>`]" . itab#ndoaction('=')
+		exec 'silent normal!' "`[\<c-v>`]" . itab#doaction('=')
 	endif
 endfun
 
