@@ -18,7 +18,9 @@ if !exists('itab#disable_maps') || !itab#disable_maps
 endif
 
 for cmd in ['o', 'O', 'S', 'cc', ']p', '[P', ']P', '[p']
-	exec 'nnoremap <silent><expr>' cmd 'itab#doaction(''' . substitute(cmd, "'", "''", 'g') . ''')'
+	if mapcheck(cmd, "n") == ""
+		exec 'nnoremap <silent><expr>' cmd 'itab#doaction(''' . substitute(cmd, "'", "''", 'g') . ''')'
+	endif
 endfor
 
 nnoremap <silent> = :set opfunc=itab#equalop<cr>g@
